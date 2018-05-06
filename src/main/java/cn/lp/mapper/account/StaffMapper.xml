@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lp.mapper.account.StaffMapper">
+	<resultMap id="BaseResultMap" type="cn.lp.po.account.Staff">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="state" jdbcType="VARCHAR" property="state" />
+		<result column="birthday" jdbcType="DATE" property="birthday" />
+		<result column="dept_id" jdbcType="INTEGER" property="deptId" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="join_date" jdbcType="DATE" property="joinDate" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, name, sex, phone, email, address, state, birthday,
+		dept_id, type,
+		join_date
+	</sql>
+	<sql id="Check_Column_List">
+		id,dept_id
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from staff
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="Check" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Check_Column_List" />
+		from staff
+		where id=#{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from staff
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="cn.lp.po.account.Staff">
+		insert into staff (id, name,
+		sex,
+		phone, email, address,
+		state, birthday, dept_id,
+		type, join_date)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{state,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+		#{deptId,jdbcType=INTEGER},
+		#{type,jdbcType=VARCHAR},
+		#{joinDate,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="cn.lp.po.account.Staff">
+		insert into staff
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="deptId != null">
+				dept_id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="joinDate != null">
+				join_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=DATE},
+			</if>
+			<if test="deptId != null">
+				#{deptId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="joinDate != null">
+				#{joinDate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="cn.lp.po.account.Staff">
+		update staff
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="deptId != null">
+				dept_id = #{deptId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="joinDate != null">
+				join_date = #{joinDate,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="cn.lp.po.account.Staff">
+		update staff
+		set name = #{name,jdbcType=VARCHAR},
+		sex =
+		#{sex,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		email =
+		#{email,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		state
+		= #{state,jdbcType=VARCHAR},
+		birthday = #{birthday,jdbcType=DATE},
+		dept_id = #{deptId,jdbcType=INTEGER},
+		type = #{type,jdbcType=VARCHAR},
+		join_date = #{joinDate,jdbcType=DATE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
