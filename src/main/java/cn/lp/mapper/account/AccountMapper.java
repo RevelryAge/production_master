@@ -17,5 +17,7 @@ public interface AccountMapper {
     int updateByPrimaryKey(Account record);
 
 	Account login(Account account);
+	
+	Account selectByStaffId(Integer staffId);
 //	List<Account> show();
 }

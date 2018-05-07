@@ -79,12 +79,12 @@ div {
 				<h3 class="four">Login</h3>
 				<form action="login" style="line-height: 50px;" method="post">
 
-					id：<input type="number" class="form-control" name="id">
-					password: <input type="password" class="form-control" name="password" >
+					id：<input type="number" required class="form-control" name="id">
+					password: <input type="password" required class="form-control" name="password" >
 					<div style="text-align: center;">
 						<p class="text-warning"
-							style="line-height: 18px; text-align: center;" role="alert">${message}</p>
-						<input type="submit" class=" btn btn-info" value="登陆">
+							style="line-height: 18px;  text-align: center;" role="alert">${message}</p>
+						<input type="submit"  class=" btn btn-info" value="登陆">
 					</div>
 				</form>
 			</div>

@@ -34,7 +34,7 @@
 	<jsp:include page="unit/navbar.jsp"></jsp:include>
 
 	<div class="one">
-		<div class="two">
+		<div class="two justify-content-center">
 
 			<h2>个人信息</h2>
 		</div>
@@ -124,13 +124,18 @@
 				<tr>
 					<th scope="row">13</th>
 					<td>登陆账号</td>
-					<td><c:if test=${staffinfo.account.id==null } >无账号</c:if>${staffinfo.account.id }</td>
+					<td><c:if test="${staffinfo.account.id==null }">无账号</c:if>${staffinfo.account.id }</td>
 				</tr>
-
-
-
 			</tbody>
 		</table>
+		<div style="text-align: center;">
+			<a class="btn btn-outline-dark"
+				href="go_change_staff?id=${staffinfo.id}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:if test="${staffinfo.account.id!=null }">
+				<a class="btn btn-outline-dark" href="staff_quit?id=${staffinfo.id}">离职</a>
+			</c:if>
+
+		</div>
 	</div>
 </body>
 </html>

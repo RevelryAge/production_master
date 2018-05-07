@@ -42,7 +42,6 @@ public class LoginController {
 			Dept d = deptMapper.selectByPrimaryKey(staff.getDeptId());
 			staff.setDept(d);
 			HttpSession s = BaseUtil.getSession();
-			System.out.println(staff.getDeptId());
 			s.setAttribute("account", account);
 			s.setAttribute("staff", staff);
 			// System.out.println(account);
@@ -68,7 +67,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout() {
 		BaseUtil.getSession().invalidate();
-		return "redirect:index";
+		return "redirect:gologin";
 	}
 
 	@RequestMapping("/index")

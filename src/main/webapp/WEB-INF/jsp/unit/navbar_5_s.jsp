@@ -18,8 +18,7 @@
 					<a class="dropdown-item" href="goaddstaff">填写员工基本信息</a> <a
 						class="dropdown-item" href="goaddaccount">添加登陆账号</a>
 			</div></li>
-		<li class="nav-item"><a class="nav-link" href="gostaffquit">员工离职</a></li>
-		<li class="nav-item"><a class="nav-link" href="gopersonalfile">人事档案维护</a></li>
+		<li class="nav-item"><a class="nav-link" href="all_staff_info">人事档案维护</a></li>
 
 	</ul>
 </body>

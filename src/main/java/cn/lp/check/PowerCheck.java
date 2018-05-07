@@ -48,7 +48,7 @@ public class PowerCheck {
 
 	}
 
-	public static boolean check(int i, byte j) {
+	public static boolean check(int i, int j) {
 		// 验证经理级别权限
 		HttpSession s = BaseUtil.getSession();
 		Account a = (Account) s.getAttribute("account");

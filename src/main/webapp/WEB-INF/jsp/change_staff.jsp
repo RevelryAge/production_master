@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -18,36 +21,32 @@
 
 
 <script src="js/holder.min.js"></script>
-<style type="text/css">
-.one {
-	width: 600px;
-	padding: 1em 1em;
-	position: relative;
-	left: 28%;
-	top: 20px;
-	line-height: 1.42857143;
-	color: #333;
-	border: 1px solid rgba(213, 213, 214, 0.85);
-}</style>
 <title>Insert title here</title>
 </head>
 <body>
 
 
 	<jsp:include page="unit/navbar.jsp"></jsp:include>
-<div class="">
+
 	<div class="row col-md-12 justify-content-md-center ">
 
 		<div class="col-md-6 order-md-1 container">
 
 			<h2 style="text-align: center;">员工信息</h2>
-			<form class="needs-validation" action="addstaff" method="psot"
+			<form class="needs-validation" action="change_staff" method="psot"
 				novalidate="">
 				<div class="row">
 					<div class="col">
-						<label for="Name" _msthash="1815554">名字</label> <input
-							class="form-control" name="name" id="Name" required=""
-							type="text" placeholder="" value="">
+						<label for="id" _msthash="181551214">id</label> <input  required
+							class="form-control" name="id" readonly="readonly"
+							value="${staffinfo.id}" id="Name" required="" type="text"
+							placeholder="">
+				
+					</div>
+					<div class="col">
+						<label for="Name" _msthash="1815554">名字</label> <input  required
+							class="form-control" name="name" 
+							id="Name"  type="text" value="${staffinfo.name}" value="">
 						<div class="invalid-feedback" _msthash="1681017">需要有效的名字。</div>
 					</div>
 					<div class="col ">
@@ -55,45 +54,45 @@
 						<div class=" form-check">
 							<div class="custom-control custom-radio">
 								<input name="sex" class="custom-control-input" id="male"
-									required="" type="radio" value="男" checked> <label
+									required="" type="radio" checked="checked" value="男"> <label
 									class="custom-control-label" for="male" _msthash="1862575">男</label>
 							</div>
 							<div class="custom-control custom-radio">
 								<input name="sex" class="custom-control-input" id="female"
-									required="" value="女" type="radio"> <label
+									required="" <c:if test="${staffinfo.sex=='女' }"> checked="checked"</c:if>  value="女" type="radio"> <label
 									class="custom-control-label" for="female" _msthash="1863225">女</label>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<label for="datepicker2" _msthash="1456122">出生年月日</label> <input
-							class="form-control" id="datepicker2" readonly="readonly" name="birthday" type="text"
-							required>
+						<label for="datepicker2" _msthash="1456122">出生年月日</label> <input  required
+							class="form-control" id="datepicker2" readonly="readonly"
+							name="birthday" type="text" value=<fmt:formatDate value="${staffinfo.birthday}" pattern="yyyy-MM-dd"/>  >
 						<div class="invalid-feedback" _msthash="1612734">请提供有效的出生年月日。</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="phone" _msthash="1454414">phone</label> <input
+						<label for="phone" _msthash="1454414">phone</label> <input  required
 							id="phone" class="form-control" name="phone"
 							pattern="(\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$"
-							required="required" type="text" placeholder="phone" />
+							 type="text"  value="${staffinfo.phone}" />
 
 						<div class="invalid-feedback" style="width: 100%;"
 							_msthash="1682213">请输入正确的手机或电话 。</div>
 					</div>
 
 					<div class="col">
-						<label for="email" _msthash="1454973">电子邮件</label> <input
-							class="form-control" id="email" type="email" required
+						<label for="email" _msthash="1454973">电子邮件</label> <input  required
+							class="form-control" id="email" type="email" value="${staffinfo.email}"
 							name="email" placeholder="you@example.com you@example">
 						<div class="invalid-feedback" _msthash="1334944">请输入电子邮件地址。</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="address" _msthash="1455532">地址</label> <input
-							class="form-control" id="address" name="address" required=""
+						<label for="address" _msthash="1455532">地址</label> <input  required
+							class="form-control" id="address" value="${staffinfo.address}" name="address" 
 							type="text" placeholder="地址">
 						<div class="invalid-feedback" _msthash="1335503">请输入地址。</div>
 					</div>
@@ -103,45 +102,45 @@
 						<label for="state" _msthash="1818986">状态</label> <select
 							class="custom-select d-block w-100" name="state" id="state"
 							required="" _msthash="63401"><option value="">选择...</option>
-							<option value="入职">入职</option>
-							<option value="在职">在职</option>
-							<option value="离职">离职</option>
+							<option <c:if test="${staffinfo.state=='入职' }"> selected</c:if> value="入职">入职</option>
+							<option <c:if test="${staffinfo.state=='在职' }"> selected</c:if> value="在职">在职</option>
+							<option <c:if test="${staffinfo.state=='离职' }"> selected</c:if> value="离职">离职</option>
 						</select>
 						<div class="invalid-feedback" _msthash="1683734">请提供有效的状态。</div>
 					</div>
 
 					<div class=" col">
-						<label for="deptId" _msthash="1844987">部门号</label> <select
+						<label for="deptId" _msthash="1844987">部门号</label> <select  required
 							class="custom-select d-block w-100" name="deptId" id="deptId"
-							required="" _msthash="6344121"><option value="">选择...</option>
-							<option value="1">生产部</option>
-							<option value="2">工艺部</option>
-							<option value="3">计划部</option>
-							<option value="4">质检部</option>
-							<option value="5">人事部</option>
+							_msthash="6344121"><option value="">选择...</option>
+							<option <c:if test="${staffinfo.deptId=='1' }"> selected</c:if>  value="1">生产部</option>
+							<option <c:if test="${staffinfo.deptId=='2' }"> selected</c:if> value="2">工艺部</option>
+							<option <c:if test="${staffinfo.deptId=='3' }"> selected</c:if> value="3">计划部</option>
+							<option <c:if test="${staffinfo.deptId=='4' }"> selected</c:if> value="4">质检部</option>
+							<option <c:if test="${staffinfo.deptId=='5' }"> selected</c:if> value="5">人事部</option>
 							<c:if test="${sessionScope.staff.deptId==6  }">
-								<option value="6">管理部</option>
+								<option <c:if test="${staffinfo.deptId=='6' }"> selected</c:if> value="6">管理部</option>
 							</c:if>
 						</select>
 						<div class="invalid-feedback" _msthash="1123734">请提供有效的部门。</div>
 					</div>
 					<div class="col">
-						<label for="datepicker1" _msthash="14515132">加入日期</label> <input
-							class="form-control" readonly="readonly" id="datepicker1" name="joinDate" type="text"
-							required>
+						<label for="datepicker1" _msthash="14515132">加入日期</label> <input  required
+							class="form-control" readonly="readonly" id="datepicker1"
+							name="joinDate" type="text" value=<fmt:formatDate value="${staffinfo.joinDate}" pattern="yyyy-MM-dd"/> >
 						<div class="invalid-feedback" _msthash="1612214">请提供有效的加入日期。</div>
 					</div>
 					<div class=" col">
-						<label for="type" _msthash="18442">工种</label> <select
+						<label for="type" _msthash="18442">工种</label> <select  required
 							class="custom-select d-block w-100" name="type" id="type"
-							required="" _msthash="1213"><option value="">选择...</option>
-							<option value="车工">车工</option>
-							<option value="铣工">铣工</option>
-							<option value="磨工">磨工</option>
-							<option value="工艺员">工艺员</option>
-							<option value="计划分配员">计划分配员</option>
-							<option value="检验">检验</option>
-							<option value="文员">文员</option></select>
+							 _msthash="1213"><option value="">选择...</option>
+							<option <c:if test="${staffinfo.type=='车工' }"> selected</c:if> value="车工">车工</option>
+							<option <c:if test="${staffinfo.type=='铣工' }"> selected</c:if>  value="铣工">铣工</option>
+							<option <c:if test="${staffinfo.type=='磨工' }"> selected</c:if> value="磨工">磨工</option>
+							<option <c:if test="${staffinfo.type=='工艺员' }"> selected</c:if> value="工艺员">工艺员</option>
+							<option <c:if test="${staffinfo.type=='计划分配员' }"> selected</c:if> value="计划分配员">计划分配员</option>
+							<option <c:if test="${staffinfo.type=='检验' }"> selected</c:if> value="检验">检验</option>
+							<option <c:if test="${staffinfo.type=='文员' }"> selected</c:if> value="文员">文员</option></select>
 						<div class="invalid-feedback" _msthash="11123734">请提供有效的工种。</div>
 
 					</div>
@@ -149,13 +148,12 @@
 
 				<br>
 				<div class="row justify-content-center">
-
-					<button class="btn btn-info" type="submit">提交</button>
+<button class="btn btn-primary btn-lg btn-block" type="reset">重置</button>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">提交</button>
 				</div>
 			</form>
 		</div>
 
-	</div>
 	</div>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields

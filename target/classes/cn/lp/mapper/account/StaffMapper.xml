@@ -23,6 +23,12 @@
 	<sql id="Check_Column_List">
 		id,dept_id
 	</sql>
+	<select id="findAll" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+	from staff
+	
+	</select>
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		select
@@ -167,6 +173,10 @@
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateState">
+	update staff
+	set state=#{state,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
 		parameterType="cn.lp.po.account.Staff">

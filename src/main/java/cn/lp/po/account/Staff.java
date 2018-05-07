@@ -2,7 +2,16 @@ package cn.lp.po.account;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Staff {
+	@Override
+	public String toString() {
+		return "Staff [id=" + id + ", name=" + name + ", sex=" + sex + ", phone=" + phone + ", email=" + email
+				+ ", address=" + address + ", state=" + state + ", birthday=" + birthday + ", deptId=" + deptId
+				+ ", type=" + type + ", joinDate=" + joinDate + ", dept=" + dept + "]";
+	}
+
 	public Staff() {
 		super();
 	}
@@ -34,16 +43,43 @@ public class Staff {
 
 	private String email;
 
+	private Account account;
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	private String address;
 
 	private String state;
-
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date birthday;
+
+	public Staff(Integer id, String name, String sex, String phone, String email, Account account, String address,
+			String state, Date birthday, Integer deptId, String type, Date joinDate, Dept dept) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.sex = sex;
+		this.phone = phone;
+		this.email = email;
+		this.account = account;
+		this.address = address;
+		this.state = state;
+		this.birthday = birthday;
+		this.deptId = deptId;
+		this.type = type;
+		this.joinDate = joinDate;
+		this.dept = dept;
+	}
 
 	private Integer deptId;
 
 	private String type;
-
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date joinDate;
 
 	private Dept dept;
