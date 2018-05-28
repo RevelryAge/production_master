@@ -121,11 +121,7 @@
 					<td>部门经理员工号</td>
 					<td>${staffinfo.dept.staffId }</td>
 				</tr>
-				<tr>
-					<th scope="row">13</th>
-					<td>登陆账号</td>
-					<td><c:if test=${staffinfo.account.id==null } >无账号</c:if>${staffinfo.account.id }</td>
-				</tr>
+				
 
 
 

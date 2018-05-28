@@ -61,11 +61,11 @@ h2 {
 			<h3 class="four">添加账号</h3>
 			<form  action="addaccount" style="line-height: 50px;" method="post">
 
-				staff-id：<input type="number" required class="form-control"
-					name="staffId"> password: <input type="password" required
+				员工号：<input type="number" required class="form-control"
+					name="staffId"> 密&nbsp;&nbsp;码: <input type="password" required
 					class="form-control" id="password" name="password">
 
-				repassword: <input type="password" id="password2" required class="form-control"
+				确认密码: <input type="password" id="password2" required class="form-control"
 					id="password2">
 				<div style="text-align: center;">
 					<p class="text-warning"

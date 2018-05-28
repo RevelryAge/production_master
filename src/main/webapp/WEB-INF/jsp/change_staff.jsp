@@ -21,6 +21,24 @@
 
 
 <script src="js/holder.min.js"></script>
+<style type="text/css">
+.one {
+margin-bottom: 1.2em;
+
+	color: #333;
+	border: 1px solid rgba(213, 213, 214, 0.85);
+}
+.two{
+	margin: 0 auto;
+	margin-top: 1%;
+}
+.four {
+	font-size: 1.8em;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 1.2em;
+	color: #333;
+}</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -28,9 +46,10 @@
 
 	<jsp:include page="unit/navbar.jsp"></jsp:include>
 
-	<div class="row col-md-12 justify-content-md-center ">
+	<div class=" row two col-md-6 justify-content-md-center  ">
+	<div class="row col  one justify-content-md-center ">
 
-		<div class="col-md-6 order-md-1 container">
+		<div class="col-md  container" style="">
 
 			<h2 style="text-align: center;">员工信息</h2>
 			<form class="needs-validation" action="change_staff" method="psot"
@@ -148,12 +167,12 @@
 
 				<br>
 				<div class="row justify-content-center">
-<button class="btn btn-primary btn-lg btn-block" type="reset">重置</button>
-					<button class="btn btn-primary btn-lg btn-block" type="submit">提交</button>
+<button class="btn btn-reset " type="reset">重置</button>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+					<button class="btn btn-info" type="submit">提交</button>
 				</div>
 			</form>
 		</div>
-
+</div>
 	</div>
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields

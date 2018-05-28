@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.lp.check.PowerCheck;
@@ -14,7 +13,6 @@ import cn.lp.mapper.account.AccountMapper;
 import cn.lp.po.account.Account;
 import cn.lp.po.account.Staff;
 import cn.lp.service.AccountService;
-import cn.lp.util.BaseUtil;
 
 @Controller
 public class AccountControler {
@@ -23,49 +21,7 @@ public class AccountControler {
 	@Autowired
 	AccountService accountService;
 
-	@RequestMapping("/updatePassword")
-	public String updatePassWord(Model m, Account account, String password1) {
-
-		if (!PowerCheck.check()) {
-			m.addAttribute("message", "请登录");
-			return "login";
-		}
-		if (account != null) {
-			Account accountTemp = accountMapper.login(account);
-
-			if (accountTemp != null) {
-
-				account.setPassword(password1);
-				accountMapper.updateByPrimaryKeySelective(account);
-				m.addAttribute("message", "修改成功 ，请重新登陆");
-				return "login";
-			} else
-				m.addAttribute("message", "密码错误， 修改失败 ，请重试");
-		}
-
-		return "updatePassword";
-	}
-
-	@RequestMapping("/goupdatePassword")
-	public String goUpdate(Model m) {
-		if (!PowerCheck.check()) {
-			m.addAttribute("message", "请登录");
-			return "login";
-		}
-		return "updatePassword";
-	}
-
-	@RequestMapping("/selfInfo")
-	public String selfInfo(Model m) {
-		if (!PowerCheck.check())
-			if (!PowerCheck.check()) {
-				m.addAttribute("message", "请登录");
-				return "login";
-			}
-		Staff staff = accountService.selectStaffInfo();
-		m.addAttribute("staffinfo", staff);
-		return "selfInfo";
-	}
+	
 
 	@RequestMapping("/goaddstaff")
 	public String goaddinfo(Model m) {
@@ -91,7 +47,7 @@ public class AccountControler {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
-		if(staff.getId()==null) {
+		if(staff.getName()==null) {
 			m.addAttribute("message", "请填写");
 			return "addstaff";
 		}

@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<ul class="navbar-nav mr-auto">
+	
 
 		<li class="nav-item"><div class="dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="staffName"
+				<a class="nav-link  text-white dropdown-toggle" href="#" id="staffName"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					style="color: white;" aria-expanded="false">
 					员工招聘 </a>
@@ -18,8 +18,8 @@
 					<a class="dropdown-item" href="goaddstaff">填写员工基本信息</a> <a
 						class="dropdown-item" href="goaddaccount">添加登陆账号</a>
 			</div></li>
-		<li class="nav-item"><a class="nav-link" href="all_staff_info">人事档案维护</a></li>
+		<li class="nav-item"><a class="nav-link text-white" href="all_staff_info">人事档案维护</a></li>
 
-	</ul>
+	
 </body>
 </html>

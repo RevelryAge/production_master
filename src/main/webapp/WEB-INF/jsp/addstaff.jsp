@@ -20,14 +20,21 @@
 <script src="js/holder.min.js"></script>
 <style type="text/css">
 .one {
-	width: 600px;
-	padding: 1em 1em;
-	position: relative;
-	left: 28%;
-	top: 20px;
-	line-height: 1.42857143;
+margin-bottom: 1.2em;
+
 	color: #333;
 	border: 1px solid rgba(213, 213, 214, 0.85);
+}
+.two{
+	margin: 0 auto;
+	margin-top: 1%;
+}
+.four {
+	font-size: 1.8em;
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 1.2em;
+	color: #333;
 }</style>
 <title>Insert title here</title>
 </head>
@@ -35,12 +42,12 @@
 
 
 	<jsp:include page="unit/navbar.jsp"></jsp:include>
-<div class="">
-	<div class="row col-md-12 justify-content-md-center ">
+<div class=" row two col-md-6 justify-content-md-center  ">
+	<div class="row col  one justify-content-md-center ">
 
-		<div class="col-md-6 order-md-1 container">
+		<div class="col-md  container" style="">
 
-			<h2 style="text-align: center;">员工信息</h2>
+			<h3 class="four">员工信息</h3>
 			<form class="needs-validation" action="addstaff" method="psot"
 				novalidate="">
 				<div class="row">
@@ -74,7 +81,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="phone" _msthash="1454414">phone</label> <input
+						<label for="phone" _msthash="1454414">手机或电话</label> <input
 							id="phone" class="form-control" name="phone"
 							pattern="(\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$"
 							required="required" type="text" placeholder="phone" />

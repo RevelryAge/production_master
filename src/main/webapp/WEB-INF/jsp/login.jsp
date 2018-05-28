@@ -76,14 +76,14 @@ div {
 				<div class="three">汽车零部件管理系统</div>
 			</div>
 			<div>
-				<h3 class="four">Login</h3>
+				<h3 class="four">登陆</h3>
 				<form action="login" style="line-height: 50px;" method="post">
 
-					id：<input type="number" required class="form-control" name="id">
-					password: <input type="password" required class="form-control" name="password" >
+					登陆账号：<input type="number" required class="form-control" name="id">
+					密&nbsp;&nbsp;&nbsp;&nbsp;码: <input type="password" required class="form-control" name="password" >
 					<div style="text-align: center;">
 						<p class="text-warning"
-							style="line-height: 18px;  text-align: center;" role="alert">${message}</p>
+							style="line-height: 18px; color:red; text-align: center;" role="alert">${message}</p>
 						<input type="submit"  class=" btn btn-info" value="登陆">
 					</div>
 				</form>

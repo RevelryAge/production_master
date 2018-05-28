@@ -2,17 +2,12 @@ package cn.lp.check;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import cn.lp.mapper.account.DeptMapper;
 import cn.lp.po.account.Account;
-import cn.lp.po.account.Dept;
 import cn.lp.po.account.Staff;
 import cn.lp.util.BaseUtil;
 
 public class PowerCheck {
-	@Autowired
-	DeptMapper deptMapper;
+	
 
 	public static boolean check() {
 		// 验证是否登陆

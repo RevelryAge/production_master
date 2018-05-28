@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lp.mapper.plan.PlanMapper">
+  <resultMap id="BaseResultMap" type="cn.lp.po.plan.Plan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="create_staff_id" jdbcType="INTEGER" property="createStaffId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="plan_end" jdbcType="DATE" property="planEnd" />
+    <result column="reality_time" jdbcType="TIMESTAMP" property="realityTime" />
+    <result column="plan_staff_id" jdbcType="INTEGER" property="planStaffId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, state, create_staff_id, create_time, plan_end, reality_time, plan_staff_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectALLPlan"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plan
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.lp.po.plan.Plan">
+    insert into plan (id, state, create_staff_id, 
+      create_time, plan_end, reality_time, 
+      plan_staff_id)
+    values (#{id,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{createStaffId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{planEnd,jdbcType=DATE}, #{realityTime,jdbcType=TIMESTAMP}, 
+      #{planStaffId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.lp.po.plan.Plan">
+    insert into plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createStaffId != null">
+        create_staff_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="planEnd != null">
+        plan_end,
+      </if>
+      <if test="realityTime != null">
+        reality_time,
+      </if>
+      <if test="planStaffId != null">
+        plan_staff_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaffId != null">
+        #{createStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEnd != null">
+        #{planEnd,jdbcType=DATE},
+      </if>
+      <if test="realityTime != null">
+        #{realityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planStaffId != null">
+        #{planStaffId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lp.po.plan.Plan">
+    update plan
+    <set>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaffId != null">
+        create_staff_id = #{createStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planEnd != null">
+        plan_end = #{planEnd,jdbcType=DATE},
+      </if>
+      <if test="realityTime != null">
+        reality_time = #{realityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planStaffId != null">
+        plan_staff_id = #{planStaffId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lp.po.plan.Plan">
+    update plan
+    set state = #{state,jdbcType=VARCHAR},
+      create_staff_id = #{createStaffId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      plan_end = #{planEnd,jdbcType=DATE},
+      reality_time = #{realityTime,jdbcType=TIMESTAMP},
+      plan_staff_id = #{planStaffId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

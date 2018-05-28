@@ -25,7 +25,7 @@
 		</javaTypeResolver>
 
 		<!-- targetProject:生成PO类的位置 -->
-		<javaModelGenerator targetPackage="cn.lp.po.account"
+		<javaModelGenerator targetPackage="cn.lp.po.plan"
 			targetProject=".\src\main\java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
@@ -33,52 +33,52 @@
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<!-- targetProject:mapper映射文件生成的位置 -->
-		<sqlMapGenerator targetPackage="cn.lp.mapper.account"
+		<sqlMapGenerator targetPackage="cn.lp.mapper.plan"
 			targetProject=".\src\main\java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="cn.lp.mapper.account" targetProject=".\src\main\java">
+			targetPackage="cn.lp.mapper.plan" targetProject=".\src\main\java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
 		<!-- <table tableName="items"></table> -->
-		
-		
-		<table tableName="staff"  enableInsert="true"
-            enableDeleteByPrimaryKey="true"
-            enableSelectByPrimaryKey="true"
-            enableUpdateByPrimaryKey="true"
-            enableCountByExample="false"
-            enableDeleteByExample="false"
-            enableSelectByExample="false"
-            enableUpdateByExample="false" />
-	<!-- 	<table tableName="timesheet"></table>
-		<table tableName="staff"></table>
-		<table tableName="dept"></table> -->
-		
-		<!-- <table tableName="facility"></table>
-		<table tableName="facility_trouble"></table>
-		 -->
 
-	<!-- 	<table tableName="order"></table>
-		<table tableName="order_detail"></table>
-		<table tableName="part"></table>
-		<table tableName="customer"></table> -->
-		
-	<!-- 	<table tableName="warehouse"></table>
-		<table tableName="goods"></table>
-		<table tableName="warehouse_in"></table>
-		<table tableName="warehouse_in_detail"></table>
-		<table tableName="warehouse_inventory"></table>
-		<table tableName="warehouse_inventory_detail"></table>
-		<table tableName="warehouse_out"></table>
-		<table tableName="warehouse_out_detail"></table>
-		<table tableName="warehouse_stock"></table>
- -->
+		<!-- <table tableName="staff" enableInsert="true" enableDeleteByPrimaryKey="true" 
+			enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true" enableCountByExample="false" 
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false" 
+			/> -->
+		<table tableName="plan" enableInsert="true"
+			enableDeleteByPrimaryKey="true" enableSelectByPrimaryKey="true"
+			enableUpdateByPrimaryKey="true" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="plan_detail" enableInsert="true"
+			enableDeleteByPrimaryKey="true" enableSelectByPrimaryKey="true"
+			enableUpdateByPrimaryKey="true" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="manufacture" enableInsert="true"
+			enableDeleteByPrimaryKey="true" enableSelectByPrimaryKey="true"
+			enableUpdateByPrimaryKey="true" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<!-- <table tableName="timesheet"></table> <table tableName="staff"></table> 
+			<table tableName="dept"></table> -->
+
+		<!-- <table tableName="facility"></table> <table tableName="facility_trouble"></table> -->
+
+		<!-- <table tableName="order"></table> <table tableName="order_detail"></table> 
+			<table tableName="part"></table> <table tableName="customer"></table> -->
+
+		<!-- <table tableName="warehouse"></table> <table tableName="goods"></table> 
+			<table tableName="warehouse_in"></table> <table tableName="warehouse_in_detail"></table> 
+			<table tableName="warehouse_inventory"></table> <table tableName="warehouse_inventory_detail"></table> 
+			<table tableName="warehouse_out"></table> <table tableName="warehouse_out_detail"></table> 
+			<table tableName="warehouse_stock"></table> -->
 
 
 		<!-- <table tableName="orderdetail"></table> -->
