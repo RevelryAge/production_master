@@ -1,5 +1,7 @@
 package cn.lp.mapper.account;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import cn.lp.po.account.Dept;
@@ -16,4 +18,6 @@ public interface DeptMapper {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+    
+    List<Dept> selectAllDept();
 }

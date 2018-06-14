@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
 	
-		<li class="nav-item" 	><a class="nav-link text-white" href="plan_all">查看生产计划</a></li>
+
+		
 		<li class="nav-item" 	><a class="nav-link text-white" href="manufacture_all">查看生产工票</a></li>
 
+	
 </body>
 </html>

@@ -24,4 +24,7 @@ public interface ManufactureMapper {
 	List<Manufacture> selectManufactureSelective(Manufacture manu);
 
 	List<Manufacture> selectManu();
+	
+	List<Manufacture> selectManuByPlanDetail(int id);
+	
 }

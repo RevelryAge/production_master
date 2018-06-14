@@ -76,4 +76,10 @@ public class Plan {
     public void setPlanStaffId(Integer planStaffId) {
         this.planStaffId = planStaffId;
     }
+
+	@Override
+	public String toString() {
+		return "Plan [id=" + id + ", state=" + state + ", createStaffId=" + createStaffId + ", createTime=" + createTime
+				+ ", planEnd=" + planEnd + ", realityTime=" + realityTime + ", planStaffId=" + planStaffId + "]";
+	}
 }

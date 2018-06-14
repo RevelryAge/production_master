@@ -96,7 +96,7 @@
 		</table>
 		<div style="text-align: center;">
 			<a class="btn btn-outline-dark"
-				href="part_tech_info?id=${partinfo.id}">维护零部件工艺信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				href="part_tech_info?id=${partinfo.id}">查看零部件工艺信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	</div>
 </body>

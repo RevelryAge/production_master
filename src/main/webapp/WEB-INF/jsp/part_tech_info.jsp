@@ -11,10 +11,10 @@
 <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
 <style type="text/css">
 .one {
-	width: 600px;
+	width: 800px;
 	padding: 1em 1em;
 	position: relative;
-	left: 28%;
+	left: 15%;
 	top: 20px;
 	line-height: 1.42857143;
 	color: #333;
@@ -60,13 +60,18 @@
 							<td>${s.drawing }</td>
 							<td>${s.name }</td>
 							<td>${s.info }</td>
-							<td><c:if test="${partinfo.state=='未完成' }">
+							<td><c:if
+									test="${partinfo.state=='未完成'&&(sessionScope.staff.deptId==2|| sessionScope.staff.deptId==6) }">
 									<a class="btn btn-outline-dark"
 										href="part_tech_go_change?techId=${s.id}">修改</a>
 									<a class="btn btn-outline-dark"
 										href="part_tech_delete?techId=${s.id}">删除</a>
-								</c:if> <c:if test="${partinfo.state=='完成' }">
+
+								</c:if> <c:if
+									test="${partinfo.state=='完成'&&(sessionScope.staff.deptId==2 ||sessionScope.staff.deptId==6) }">
 									<button type="button" class="btn btn-outline-dark" disabled>修改</button>
+								</c:if> <c:if test="${!(sessionScope.staff.deptId==2||sessionScope.staff.deptId==6)  }">
+									<button type="button" class="btn btn-outline-dark" disabled>无</button>
 								</c:if>
 						</tr>
 
@@ -77,19 +82,22 @@
 
 				</tbody>
 
-				
+
 			</table>
 
 			<div class="row justify-content-center">
-				<c:if test="${partinfo.state!='完成' }">
+				<c:if test="${partinfo.state!='已完成'&&(essionScope.staff.deptId==2||sessionScope.staff.deptId==6) }">
 					<a class="btn btn-outline-dark"
 						href="part_tech_go_add?partId=${partinfo.id}">添加</a>
+					<a class="btn btn-outline-dark"
+						href="part_tech_complete?partId=${partinfo.id}">完成</a>
 				</c:if>
 			</div>
 		</div>
 		<div class="  " style="text-align: center;">
-		<p class=""
-					style="line-height: 18px;color:red; text-align: center;" role="alert">${message}</p>
+			<p class=""
+				style="line-height: 18px; color: red; text-align: center;"
+				role="alert">${message}</p>
 			<div class="">
 				<p class="text-dark">一共${pageInfo.pages}页,当前第${pageInfo.pageNum}页</p>
 			</div>
@@ -108,8 +116,9 @@
 							<span class="sr-only">上一页</span>
 					</a></li>
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.nextPage}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span> <span class="sr-only">下一页</span>
+						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.nextPage}"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+							class="sr-only">下一页</span>
 					</a></li>
 					<li class="btn-outline-dark"><a class="btn btn-outline-dark"
 						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.lastPage}">最后一页</a></li>

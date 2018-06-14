@@ -64,14 +64,12 @@ h2 {
 					value="${partTech.id }" name="id" >
 				part id: <input type="text" readonly class="form-control-plaintext"
 					value="${partinfo.id }" name="partId">
-					 工序号：<input
-					type="number" required class="form-control"
+					 工序号：<input	type="number" required class="form-control"
 					value="${partTech.count }" name="count"> 
 					drawing: <input
 					type="text" required value="${partTech.drawing }"
 					class="form-control" name="drawing"> 
-					name: <input
-					type="text" required class="form-control" name="name"
+					name: <input	type="text" required class="form-control" name="name"
 					value="${partTech.name }">info: <input type="text"
 					required class="form-control" value="${partTech.info }" name="info">
 				<div style="text-align: center;">

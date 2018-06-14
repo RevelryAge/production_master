@@ -26,7 +26,7 @@ public class PartControler {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(2)) {
+		if (PowerCheck.check(5) && !PowerCheck.check(6)) {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
@@ -42,7 +42,7 @@ public class PartControler {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(2)) {
+		if (PowerCheck.check(5) && !PowerCheck.check(6)) {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
@@ -94,41 +94,5 @@ public class PartControler {
 		return "redirect:part_all";
 
 	}
-
-	/*
-	 * @RequestMapping("/go_change_staff2") public String goChangStaff(Model
-	 * m,Integer id ) { if (!PowerCheck.check()) { m.addAttribute("message", "请登录");
-	 * return "login"; } if (!PowerCheck.check(6)) { m.addAttribute("message",
-	 * "不好意思 没有权限"); return "index"; } Staff staffinfo =
-	 * accountService.selectStaffById(id); staffinfo =
-	 * accountService.addDept(staffinfo); m.addAttribute("staffinfo", staffinfo);
-	 * 
-	 * return "change_staff"; }
-	 * 
-	 * @RequestMapping("/change_staff1") public String changStaffInfo(Staff
-	 * staff,Model m) { if (!PowerCheck.check()) { m.addAttribute("message", "请登录");
-	 * return "login"; } if (!PowerCheck.check(5)) { m.addAttribute("message",
-	 * "不好意思 没有权限"); return "index"; }
-	 * 
-	 * if(staff.getId()==null) { m.addAttribute("message", "请填写"); return
-	 * "redirect:go_change_staff"; }
-	 * 
-	 * if(accountService.changeStaff(staff)) {
-	 * 
-	 * m.addAttribute("message", "修改成功"); return "index"; } return
-	 * "redirect:go_change_staff";
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping("/staff_quit2") public String staffQuit( @RequestParam int
-	 * id, Model m) { if (!PowerCheck.check()) { m.addAttribute("message", "请登录");
-	 * return "login"; } if (!PowerCheck.check(5,0)) { m.addAttribute("message",
-	 * "不好意思 没有权限");
-	 * 
-	 * } if(accountService.quitStaff(id)) m.addAttribute("message", "离职成功"); else
-	 * m.addAttribute("message", "离职失败"); System.out.println(1); return "index";
-	 * 
-	 * }
-	 */
 
 }

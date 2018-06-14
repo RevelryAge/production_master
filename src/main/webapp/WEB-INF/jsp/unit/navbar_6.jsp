@@ -7,21 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<ul class="navbar-nav mr-auto">
+	
 
 		<li class="nav-item"><div class="dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="staffName"
+				<a class="nav-link  text-white dropdown-toggle" href="#" id="staffName"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					style="color: white;" aria-expanded="false"> 零部件 </a>
-			
-					<div class="dropdown-menu" aria-labelledby="staffName">
-						<a class="dropdown-item" href="part_go_add">添加零部件</a>
-				
-				<a class="dropdown-item" href="part_all">查看零部件</a>
+					style="color: white;" aria-expanded="false">
+					部门信息 </a>
+				<div class="dropdown-menu" aria-labelledby="staffName">
+					<a class="dropdown-item" href="dept_all">查看部门信息</a> <a
+						class="dropdown-item" href="go_deptManager_change">晋升部门经理</a>
 			</div></li>
+		
 
-
-
-	</ul>
+	
 </body>
 </html>

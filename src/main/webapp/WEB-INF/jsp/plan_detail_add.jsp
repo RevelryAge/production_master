@@ -60,11 +60,11 @@ h2 {
 		<div>
 			<h3 class="four">添加计划详情</h3>
 			<form action="plan_detail_add" style="line-height: 50px;" method="post">
-				plan id: <input type="number" required readonly="readonly" class="form-control"
+				计划号: <input type="number" required readonly="readonly" class="form-control"
 					 name="planId" value="${planId }" >
-				part id: <input type="number"  required class="form-control"
+			零部件号	: <input type="number"  required class="form-control"
 					value="" name="partId"> 
-					num：<input
+					数量：<input
 					type="number" required class="form-control" name="num">
 			
 				<div style="text-align: center;">

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.pagehelper.PageInfo;
 
 import cn.lp.check.PowerCheck;
+import cn.lp.mapper.part.PartMapper;
 import cn.lp.po.part.Part;
 import cn.lp.po.part.PartTechnology;
 import cn.lp.service.PartService;
@@ -18,6 +19,8 @@ import cn.lp.service.PartService;
 public class PartTechControler {
 	@Autowired
 	PartService partService;
+	@Autowired
+	PartMapper partMapper;
 
 	@RequestMapping("/part_tech_info")
 	public String selectAllPartTech(@RequestParam(required = true, defaultValue = "1") int page, int id, Model m) {
@@ -25,15 +28,37 @@ public class PartTechControler {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(2)) {
+		if (PowerCheck.check(5)&& !PowerCheck.check(6)) {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
 		m.addAttribute("partinfo", partService.selectPartById(id));
 
 		PageInfo<PartTechnology> pageInfo = partService.selectAllPartTechByPartId(id, page);
+		
 		m.addAttribute(pageInfo);
 		return "part_tech_info";
+
+	}
+	@RequestMapping("/part_tech_complete")
+	public String partTechComplete(@RequestParam(required = true, defaultValue = "1") int page, int partId, Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(2) ) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+		}
+		
+		Part part =new Part();
+		
+		part.setId(partId);
+		part.setState("已完成");
+		partMapper.updateByPrimaryKeySelective(part);
+		PageInfo<Part> pageInfo = partService.selectAllPart(page);
+		m.addAttribute(pageInfo);
+		return "part_all";
 
 	}
 
@@ -122,16 +147,16 @@ public class PartTechControler {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(5, 0)) {
+		if (!PowerCheck.check(2, 0)) {
 			m.addAttribute("message", "不好意思 没有权限");
-
+			return "index";
 		}
 		if (partTech.getPartId() == null) {
 
 			return "index";
 		}
-
-		if (partService.selectPartTechByCount(partTech.getCount(), partTech.getId()) != null) {
+System.out.println(partTech);
+		if (partService.selectPartTechByCount(partTech.getCount(), partTech.getPartId()) != null) {
 			m.addAttribute("message", "工序号已存在，请先删除");
 			System.out.println("工序号已存在，请先删除");
 			PageInfo<PartTechnology> pageInfo = partService.selectAllPartTechByPartId(partTech.getPartId(), 1);
@@ -158,9 +183,9 @@ public class PartTechControler {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(5, 0)) {
+		if (!PowerCheck.check(2, 0)) {
 			m.addAttribute("message", "不好意思 没有权限");
-
+			return "index";
 		}
 		if (partService.selectPartTechById(techId) == null || techId == null) {
 

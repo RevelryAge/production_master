@@ -42,6 +42,7 @@
 		from manufacture
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	
 	<select id="selectManu" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -49,7 +50,7 @@
 
 	</select>
 	<select id="selectManufactureSelective"
-		parameterType="cn.lp.po.plan.Manufacture">
+		parameterType="cn.lp.po.plan.Manufacture" resultMap="BaseResultMap">
 
 		select
 		<include refid="Base_Column_List" />

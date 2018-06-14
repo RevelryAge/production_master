@@ -12,6 +12,7 @@ import cn.lp.mapper.account.AccountMapper;
 import cn.lp.mapper.account.DeptMapper;
 import cn.lp.mapper.account.StaffMapper;
 import cn.lp.po.account.Account;
+import cn.lp.po.account.Dept;
 import cn.lp.po.account.Staff;
 import cn.lp.service.AccountService;
 import cn.lp.util.BaseUtil;
@@ -64,10 +65,11 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public PageInfo<Staff> selectAllStaff(int page) {
 		// TODO Auto-generated method stub
-		PageHelper.startPage(page, 10);
+		PageHelper.startPage(page,10);
 		List<Staff> staffs = staffMapper.findAll();
 		PageInfo<Staff> p = new PageInfo<>(staffs);
 
+		
 		return p;
 	}
 
@@ -122,6 +124,39 @@ public class AccountServiceImpl implements AccountService {
 			account.setPassword(null);
 		staff.setAccount(account);
 		return staff;
+	}
+
+	@Override
+	public List<Dept> selectDeptInfo() {
+		// TODO Auto-generated method stub
+
+		List<Dept> depts = deptMapper.selectAllDept();
+
+		return depts;
+	}
+
+	@Override
+	public Boolean changeDeptManager(int deptId, int staffId) {
+		// TODO Auto-generated method stub
+
+		// 认为已经验证完成
+		Dept dept = deptMapper.selectByPrimaryKey(deptId);
+		int staffIdBefore = dept.getStaffId();
+		Account accountBefor = accountMappper.selectByStaffId(staffIdBefore);
+		dept.setId(deptId);
+		dept.setStaffId(staffId);
+		Account account = accountMappper.selectByStaffId(staffId);
+		account.setStaffId(staffId);
+		accountBefor.setGrade(1);
+		account.setGrade(2);
+		if (accountMappper.updateByPrimaryKeySelective(account) == 1) {//将晋升后的账户权限修改
+			if (accountMappper.updateByPrimaryKeySelective(accountBefor) == 1) {//将降级的账户权限修改
+				if (deptMapper.updateByPrimaryKeySelective(dept) == 1)
+					return true;
+			}
+		}
+
+		return false;
 	}
 
 }

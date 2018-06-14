@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +12,7 @@
 <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
 <style type="text/css">
 .one {
-	width:900px;
+	width: 900px;
 	padding: 1em 1em;
 	position: relative;
 	left: 10%;
@@ -51,8 +51,10 @@
 						<th scope="col">数量</th>
 						<th scope="col">合格数量</th>
 						<th scope="col">不合格数量</th>
-						
-						<th scope="col">操作</th>
+						<c:if
+							test="${sessionScope.staff.deptId==3&&sessionScope.account.grade==2 }">
+							<th scope="col">操作</th>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,17 +66,19 @@
 							<td>${s.num }</td>
 							<td>${s.qualifiedNum }</td>
 							<td>${s.unqualifiedNum }</td>
-							
 
-						
-							<td><c:if test="${plan.state=='计划录入' }">
-									<a class="btn btn-outline-dark"
-										href="plan_detail_delete?planDetailId=${s.id}">删除</a>
+							<c:if
+								test="${sessionScope.staff.deptId==3&&sessionScope.account.grade==2 }">
+
+								<td><c:if test="${plan.state=='计划录入' }">
 										<a class="btn btn-outline-dark"
-										href="plan_detail_go_change?planDetailId=${s.id}">修改</a>
-								</c:if> <c:if test="${plan.state!='计划录入' }">
-									<button type="button" class="btn btn-outline-dark" disabled>修改</button>
-								</c:if>
+											href="plan_detail_delete?planDetailId=${s.id}">删除</a>
+										<a class="btn btn-outline-dark"
+											href="plan_detail_go_change?planDetailId=${s.id}">修改</a>
+									</c:if> <c:if test="${plan.state!='计划录入' }">
+										<button type="button" class="btn btn-outline-dark" disabled>修改</button>
+									</c:if></td>
+							</c:if>
 						</tr>
 
 
@@ -87,15 +91,38 @@
 
 			</table>
 
-			<div class="row justify-content-center"><c:if  test="${plan.state=='计划录入' }" >
-				<c:if test="${sessionScope.staff.deptId==3&&ssessionScope.account.grade>=2||sessionScope.staff.deptId==3 }">
-					<a class="btn btn-outline-dark"
-						href="plan_detail_go_add?planId=${plan.id}">添加</a>
+			<div class="row justify-content-center">
+				<c:if test="${plan.state=='计划录入' }">
+					<c:if
+						test="${sessionScope.staff.deptId==3&&ssessionScope.account.grade>=2 }">
+						<a class="btn btn-outline-dark"
+							href="plan_detail_go_add?planId=${plan.id}">添加</a>
+						<a class="btn btn-outline-dark"
+							href="plan_complete?planId=${plan.id}">完成</a>
+					</c:if>
+					<c:if test="${sessionScope.staff.deptId==6 }">
+						<a class="btn btn-outline-dark"
+							href="plan_detail_go_add?planId=${plan.id}">添加</a>
+						<a class="btn btn-outline-dark"
+							href="plan_complete?planId=${plan.id}">录入完成</a>
+					</c:if>
 				</c:if>
-				<c:if test="${sessionScope.staff.deptId==6 }">
-					<a class="btn btn-outline-dark"
-						href="plan_detail_go_add?planId=${plan.id}">添加</a>
-				</c:if></c:if>
+				<c:if test="${plan.state=='计划分配' }">
+					<c:if
+						test="${sessionScope.staff.deptId==3&&ssessionScope.account.grade>=2||sessionScope.staff.deptId==6 }">
+						<a class="btn btn-outline-dark"
+							href="plan_do?planId=${plan.id}">加工</a>
+					</c:if>
+					
+				</c:if>
+				<c:if test="${plan.state=='加工' }">
+					<c:if
+						test="${sessionScope.staff.deptId==4&&ssessionScope.account.grade>=2||sessionScope.staff.deptId==6 }">
+						<a class="btn btn-outline-dark"
+							href="plan_checked?planId=${plan.id}">完成</a>
+					</c:if>
+					
+				</c:if>
 			</div>
 		</div>
 		<div class="  " style="text-align: center;">
@@ -112,19 +139,19 @@
 
 
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.firstPage}">第一页</a></li>
+						href="plan_detail_info?id=${plan.id}&page=${pageInfo.firstPage}">第一页</a></li>
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.prePage}"
+						href="plan_detail_info?id=${plan.id}&page=${pageInfo.prePage}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							<span class="sr-only">上一页</span>
 					</a></li>
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.nextPage}"
+						href="plan_detail_info?id=${plan.id}&page=${pageInfo.nextPage}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 							class="sr-only">下一页</span>
 					</a></li>
 					<li class="btn-outline-dark"><a class="btn btn-outline-dark"
-						href="part_tech_info?id=${partinfo.id}&page=${pageInfo.lastPage}">最后一页</a></li>
+						href="plan_detail_info?id=${plan.id}&page=${pageInfo.lastPage}">最后一页</a></li>
 				</ul>
 			</div>
 		</div>

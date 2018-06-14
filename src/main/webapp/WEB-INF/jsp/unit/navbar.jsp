@@ -13,11 +13,16 @@
 	</c:if>
 
 	<c:if
-		test="${sessionScope.staff.deptId==2||sessionScope.staff.deptId==6 }">
+		test="${sessionScope.staff.deptId==2 }">
 		<jsp:include page="navbar_2_s.jsp"></jsp:include>
 	</c:if>
 	<c:if
-		test="${sessionScope.staff.deptId==3&&sessionScope.account.grade==3 }">
+		test="${sessionScope.staff.deptId==1 }">
+		<jsp:include page="navbar_2_s.jsp"></jsp:include>
+		<jsp:include page="navbar_1.jsp"></jsp:include>
+	</c:if>
+	<c:if
+		test="${sessionScope.staff.deptId==3&&sessionScope.account.grade==2 }">
 		<jsp:include page="navbar_3.jsp"></jsp:include>
 	</c:if>
 	<c:if
@@ -25,8 +30,22 @@
 		<jsp:include page="navbar_3.jsp"></jsp:include>
 	</c:if>
 	<c:if
+		test="${sessionScope.staff.deptId==4 }">
+		<jsp:include page="navbar_2_s.jsp"></jsp:include>
+		<jsp:include page="navbar_1.jsp"></jsp:include>
+	</c:if>
+	<c:if
+		test="${sessionScope.staff.deptId==4&&sessionScope.account.grade==2 }">
+		
+		<jsp:include page="navbar_4.jsp"></jsp:include>
+	</c:if>
+	<c:if
 		test="${sessionScope.staff.deptId==3||sessionScope.staff.deptId==6}">
 		<jsp:include page="navbar_3_s.jsp"></jsp:include>
+	</c:if>
+	<c:if
+		test="${sessionScope.staff.deptId==6 }">
+		<jsp:include page="navbar_6.jsp"></jsp:include>
 	</c:if>
 </ul>
 <jsp:include page="navbar_right.jsp"></jsp:include> </nav>

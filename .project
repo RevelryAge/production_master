@@ -3,6 +3,7 @@
 	<name>lz</name>
 	<comment></comment>
 	<projects>
+		<project>spring-web-4.3.13.RELEASE</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -23,6 +23,7 @@ public interface PartTechnologyMapper {
 
 	List<PartTechnology> selectAllPartTechByPartId(Integer id);
 
-	PartTechnology selectPartTechByCount(@Param("count")Integer count,@Param("id")Integer id);
+	PartTechnology selectPartTechByCount(@Param("count")Integer count,@Param("partId")Integer partId);
+
 
 }

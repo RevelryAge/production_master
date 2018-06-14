@@ -1,5 +1,7 @@
 package cn.lp.control.account;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import cn.lp.check.PowerCheck;
 import cn.lp.mapper.account.AccountMapper;
 import cn.lp.po.account.Account;
+import cn.lp.po.account.Dept;
 import cn.lp.po.account.Staff;
 import cn.lp.service.AccountService;
 
@@ -20,8 +23,6 @@ public class AccountControler {
 	AccountMapper accountMapper;
 	@Autowired
 	AccountService accountService;
-
-	
 
 	@RequestMapping("/goaddstaff")
 	public String goaddinfo(Model m) {
@@ -47,7 +48,7 @@ public class AccountControler {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
-		if(staff.getName()==null) {
+		if (staff.getName() == null) {
 			m.addAttribute("message", "请填写");
 			return "addstaff";
 		}
@@ -87,7 +88,7 @@ public class AccountControler {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
-		if(account.getStaffId()==null) {
+		if (account.getStaffId() == null) {
 			m.addAttribute("message", "请填写");
 			return "addaccount";
 		}
@@ -111,7 +112,7 @@ public class AccountControler {
 		return "index";
 
 	}
-	
+
 	@RequestMapping("/all_staff_info")
 	public String selectAllStaff(@RequestParam(required = true, defaultValue = "1") int page, Model m) {
 		if (!PowerCheck.check()) {
@@ -140,13 +141,14 @@ public class AccountControler {
 		}
 		Staff staffinfo = accountService.selectStaffById(id);
 		staffinfo = accountService.addDept(staffinfo);
-		staffinfo =accountService.addAccountToStaff(staffinfo);
+		staffinfo = accountService.addAccountToStaff(staffinfo);
 		m.addAttribute("staffinfo", staffinfo);
 		return "staff_info";
 
 	}
+
 	@RequestMapping("/go_change_staff")
-	public String goChangStaff(Model m,Integer id ) {
+	public String goChangStaff(Model m, Integer id) {
 		if (!PowerCheck.check()) {
 			m.addAttribute("message", "请登录");
 			return "login";
@@ -161,8 +163,9 @@ public class AccountControler {
 
 		return "change_staff";
 	}
+
 	@RequestMapping("/change_staff")
-	public String changStaffInfo(Staff staff,Model m) {
+	public String changStaffInfo(Staff staff, Model m) {
 		if (!PowerCheck.check()) {
 			m.addAttribute("message", "请登录");
 			return "login";
@@ -171,36 +174,97 @@ public class AccountControler {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
-		
-		if(staff.getId()==null) {
+
+		if (staff.getId() == null) {
 			m.addAttribute("message", "请填写");
 			return "redirect:go_change_staff";
 		}
-	
-		if(accountService.changeStaff(staff)) {
-		
+
+		if (accountService.changeStaff(staff)) {
+
 			m.addAttribute("message", "修改成功");
 			return "index";
 		}
 		return "redirect:go_change_staff";
-		
+
 	}
+
 	@RequestMapping("/staff_quit")
-	public String staffQuit( @RequestParam int id, Model m) {
+	public String staffQuit(@RequestParam int id, Model m) {
 		if (!PowerCheck.check()) {
 			m.addAttribute("message", "请登录");
 			return "login";
 		}
-		if (!PowerCheck.check(5,0)) {
+		if (!PowerCheck.check(5, 0)) {
 			m.addAttribute("message", "不好意思 没有权限");
-		
+
 		}
-		if(accountService.quitStaff(id))
+		if (accountService.quitStaff(id))
 			m.addAttribute("message", "离职成功");
 		else
 			m.addAttribute("message", "离职失败");
 		System.out.println(1);
 		return "index";
+
+	}
+
+	@RequestMapping("/dept_all")
+	public String deptInfo(Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(6, 0)) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+
+		}
+
+		List<Dept> depts = accountService.selectDeptInfo();
+		m.addAttribute("depts", depts);
+		return "dept_all";
+	}
+	@RequestMapping("/go_deptManager_change")
+	public String goDeptManagerChange(Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(6, 0)) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+
+		}
+
+		return "deptManager_change";
+	}
+	@RequestMapping("/deptManager_change")
+	public String changeDeptManager(@RequestParam Integer staffId, Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(6, 0)) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+
+		}
+		if (staffId == null) {
+			return "deptManager_change";
+
+		}
+		Staff staff = accountService.selectStaffById(staffId);
+		Account account = accountMapper.selectByStaffId(staffId);
+		if (staff == null || account == null) {
+			m.addAttribute("message", "晋升员工不存在");
+		}
+		if (accountService.changeDeptManager(staff.getDeptId(), staffId)) {
+			m.addAttribute("message", "成功");
+		}
+
+		List<Dept> depts = accountService.selectDeptInfo();
+		m.addAttribute("depts", depts);
+		return "dept_all";
 
 	}
 

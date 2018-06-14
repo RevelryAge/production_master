@@ -1,5 +1,9 @@
 package cn.lp.control.plan;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.pagehelper.PageInfo;
 
 import cn.lp.check.PowerCheck;
+import cn.lp.mapper.plan.ManufactureMapper;
+import cn.lp.mapper.plan.PlanDetailMapper;
+import cn.lp.mapper.plan.PlanMapper;
 import cn.lp.po.account.Staff;
 import cn.lp.po.part.Part;
+import cn.lp.po.plan.Manufacture;
 import cn.lp.po.plan.Plan;
 import cn.lp.po.plan.PlanDetail;
 import cn.lp.service.AccountService;
@@ -24,12 +32,32 @@ public class PlanControler {
 	PlanService planService;
 	@Autowired
 	AccountService accountService;
-
+	@Autowired
+	PlanMapper planMapper;
 	@Autowired
 	PartService partService;
+	@Autowired
+	PlanDetailMapper planDetailMapper;
+	@Autowired
+	ManufactureMapper maunMapper;
 
 	@RequestMapping("plan_all")
 	public String selectAll(@RequestParam(required = true, defaultValue = "1") int page, Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if ((!PowerCheck.check(3)) && (!PowerCheck.check(4))) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+		}
+		PageInfo<Plan> pageInfo = planService.selectAllPlan(page);
+		m.addAttribute(pageInfo);
+		return "plan_all";
+	}
+
+	@RequestMapping("plan_complete")
+	public String planComplete(@RequestParam(required = true, defaultValue = "1") int page, Integer planId, Model m) {
 		if (!PowerCheck.check()) {
 			m.addAttribute("message", "请登录");
 			return "login";
@@ -38,6 +66,88 @@ public class PlanControler {
 			m.addAttribute("message", "不好意思 没有权限");
 			return "index";
 		}
+		if (planId == null) {
+			return "index";
+		}
+		Plan plan = new Plan();
+		plan.setId(planId);
+		plan.setState("计划分配");
+		m.addAttribute("message", "成功");
+		planMapper.updateByPrimaryKeySelective(plan);
+		PageInfo<Plan> pageInfo = planService.selectAllPlan(page);
+		m.addAttribute(pageInfo);
+		return "plan_all";
+	}
+
+	@RequestMapping("plan_do")
+	public String planDo(@RequestParam(required = true, defaultValue = "1") int page, Integer planId, Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(3)) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+		}
+		if (planId == null) {
+			return "index";
+		}
+		Plan plan = new Plan();
+		plan.setId(planId);
+		plan.setState("加工");
+		m.addAttribute("message", "成功");
+		planMapper.updateByPrimaryKeySelective(plan);
+		PageInfo<Plan> pageInfo = planService.selectAllPlan(page);
+		m.addAttribute(pageInfo);
+		return "plan_all";
+	}
+
+	@RequestMapping("plan_checked")
+	public String planChecked(@RequestParam(required = true, defaultValue = "1") int page, Integer planId, Model m) {
+		if (!PowerCheck.check()) {
+			m.addAttribute("message", "请登录");
+			return "login";
+		}
+		if (!PowerCheck.check(4)) {
+			m.addAttribute("message", "不好意思 没有权限");
+			return "index";
+		}
+		if (planId == null) {
+			return "index";
+		}
+		Plan plan = new Plan();
+		List<PlanDetail> planDetails = planDetailMapper.selectPlanDetailByPlanId(planId);
+		for (int i = 0; i < planDetails.size(); i++) {
+			PlanDetail planDetail = planDetails.get(i);
+
+			Manufacture ma = new Manufacture();
+			ma.setPlanDetailId(planDetail.getId());
+			List<Manufacture> manus = maunMapper.selectManufactureSelective(ma);
+			int nq = 0, unq = 0;
+			if (manus.size() > 0) {
+				for (int j = 0; j < manus.size(); j++) {
+					nq = nq + manus.get(j).getQualifiedNum();
+					unq = unq + manus.get(j).getUnqualifiedNum();
+
+				}
+				if (nq + unq != planDetail.getNum()) {
+					/*m.addAttribute("message", "并未完成");
+					PageInfo<Plan> pageInfo = planService.selectAllPlan(page);
+					m.addAttribute(pageInfo);
+					return "plan_all";*/
+				}
+				planDetail.setQualifiedNum(nq);
+				planDetail.setUnqualifiedNum(unq);
+				planDetailMapper.updateByPrimaryKeySelective(planDetail);
+			}
+		}
+
+		plan.setId(planId);
+		plan.setState("完成");
+		plan.setRealityTime(new Date());
+
+		m.addAttribute("message", "成功");
+		planMapper.updateByPrimaryKeySelective(plan);
 		PageInfo<Plan> pageInfo = planService.selectAllPlan(page);
 		m.addAttribute(pageInfo);
 		return "plan_all";
@@ -79,6 +189,7 @@ public class PlanControler {
 		}
 
 		plan.setState("计划录入");
+		plan.setCreateTime(new Date());
 
 		if (!planService.addPlan(plan)) {
 			m.addAttribute("message", "插入失败");

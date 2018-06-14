@@ -64,8 +64,15 @@ public class PartTechnology implements Comparable<PartTechnology> {
 	
 
 	@Override
+	public String toString() {
+		return "PartTechnology [id=" + id + ", partId=" + partId + ", count=" + count + ", drawing=" + drawing
+				+ ", name=" + name + ", info=" + info + "]";
+	}
+
+	@Override
 	public int compareTo(PartTechnology o) {
 		// TODO Auto-generated method stub
+		
 		return this.count-o.count;
 	}
     

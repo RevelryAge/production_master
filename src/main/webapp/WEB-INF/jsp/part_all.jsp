@@ -95,7 +95,7 @@
 							<span aria-hidden="true">&raquo;</span> <span class="sr-only">下一页</span>
 					</a></li>
 					<li class="btn-outline-dark"><a class="btn btn-outline-dark"
-						href="all_staff_info?page=${pageInfo.lastPage}">最后一页</a></li>
+						href="part_all?page=${pageInfo.lastPage}">最后一页</a></li>
 				</ul>
 			</div>
 		</div>

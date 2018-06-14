@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +12,7 @@
 <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
 <style type="text/css">
 .one {
-	width:1000px;
+	width: 1000px;
 	padding: 1em 1em;
 	position: relative;
 	left: 10%;
@@ -57,26 +57,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="s" varStatus="v" items="${pageInfo.list }">
-						<tr>
-							<th scope="row">${v.count}</th>
-							<td>${s.id }</td>
+					<c:forEach var="s" varStatus="v" items="${pageInfo.list }"> 
+					
+							<tr>
+								<th scope="row">${v.count}</th>
+								<td>${s.id }</td>
 
-							<td>${s.state }</td>
-							<td>${s.createStaffId }</td>
-							<td>${s.planStaffId }</td>
+								<td>${s.state }</td>
+								<td>${s.createStaffId }</td>
+								<td>${s.planStaffId }</td>
 
-							<td><fmt:formatDate value="${s.createTime}"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
-							<td><fmt:formatDate value="${s.planEnd}"
-									pattern="yyyy-MM-dd" /></td>
-							<td><fmt:formatDate value="${s.realityTime}"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
-							<td><a class="btn btn-outline-dark"
-								href="plan_detail_info?id=${s.id}">查看详情</a></td>
-						</tr>
+								<td><fmt:formatDate value="${s.createTime}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								<td><fmt:formatDate value="${s.planEnd}"
+										pattern="yyyy-MM-dd" /></td>
+								<td><fmt:formatDate value="${s.realityTime}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								<td><a class="btn btn-outline-dark"
+									href="plan_detail_info?id=${s.id}">查看详情</a></td>
+							</tr>
 
-
+						
 					</c:forEach>
 
 
@@ -88,13 +89,12 @@
 
 			<div class="row justify-content-center">
 
-				<c:if test="${sessionScope.staff.deptId==3&&ssessionScope.account.grade>=2 }">
-					<a class="btn btn-outline-dark"
-						href="plan_go_add">添加</a>
+				<c:if
+					test="${sessionScope.staff.deptId==3&&sessionScope.account.grade==2 }">
+					<a class="btn btn-outline-dark" href="plan_go_add">添加</a>
 				</c:if>
 				<c:if test="${sessionScope.staff.deptId==6 }">
-					<a class="btn btn-outline-dark"
-						href="plan_go_add">添加</a>
+					<a class="btn btn-outline-dark" href="plan_go_add">添加</a>
 				</c:if>
 			</div>
 		</div>
@@ -114,14 +114,12 @@
 					<li class="page-item"><a class="btn btn-outline-dark"
 						href="plan_all?page=${pageinfo.firstPage}">第一页</a></li>
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="plan_all?page=${pageInfo.prePage}"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							<span class="sr-only">上一页</span>
+						href="plan_all?page=${pageInfo.prePage}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span> <span class="sr-only">上一页</span>
 					</a></li>
 					<li class="page-item"><a class="btn btn-outline-dark"
-						href="plan_all?page=${pageInfo.nextPage}"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-							class="sr-only">下一页</span>
+						href="plan_all?page=${pageInfo.nextPage}" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span> <span class="sr-only">下一页</span>
 					</a></li>
 					<li class="btn-outline-dark"><a class="btn btn-outline-dark"
 						href="plan_all?page=${pageInfo.lastPage}">最后一页</a></li>
