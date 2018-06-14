@@ -88,6 +88,6 @@ h2 {
 			</form>
 		</div>
 	</div>
-	<
+	
 </body>
 </html>

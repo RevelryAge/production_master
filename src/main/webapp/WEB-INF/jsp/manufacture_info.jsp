@@ -134,11 +134,33 @@
 
 
 			</tbody>
-		</table>
+		</table><c:if
+		test="${sessionScope.staff.deptId==6||sessionScope.staff.deptId==1}">
+	<c:if
+		test="${manufacture.state=='下单'}">
 		<div style="text-align: center;">
 			<a class="btn btn-outline-dark"
-				href="manufacture_info?id=${manufacture.id}">维护零部件工艺信息</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		</div>
+				href="manufacture_get?id=${manufacture.id}">接单</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>	
+		</c:if>
+		<c:if
+		test="${manufacture.state=='接单'}">
+		<div style="text-align: center;">
+			<a class="btn btn-outline-dark"
+				href="manufacture_complete?id=${manufacture.id}">完成</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>	
+		</c:if>
+	</c:if><c:if
+		test="${sessionScope.staff.deptId==4||sessionScope.staff.deptId==6}">
+	<c:if
+		test="${manufacture.state=='完成'}">
+		<div style="text-align: center;">
+			<a class="btn btn-outline-dark"
+				href="manufacture_go_checked?id=${manufacture.id}">已检验</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>	
+		</c:if>
+		
+	</c:if>
 	</div>
 </body>
 </html>
